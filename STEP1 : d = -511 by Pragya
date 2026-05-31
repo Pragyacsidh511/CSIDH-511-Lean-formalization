@@ -1,0 +1,4 @@
+/-- My discriminant: d = -511 -/
+def d : Int := -511
+/-- verify: d+ 511 = 0 ? -/
+#eval d + 511

@@ -1,4 +1,0 @@
-/-- Step 1:defining prime for CSIDH-511 -/
-def p : Nat := 511
-/-- verify : 511 + 1 = 512 ? -/
-#eval p + 1
