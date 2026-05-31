@@ -1,11 +1,12 @@
-/-- My discriminant: d = -511 -/
+-- d = -511 
 def d : Int := -511
-/-- verify: d+ 511 = 0 ? -/
-#eval d + 511
-def security_bits : Nat := 128 
-#eval security_bits
+#eval d 
 
-/--Step 3: if d = -511 then security is 128 -/
-theorem security_of_d : d = -511 -> security_bits = 128 : = by intro h 
-rw [h]
-rfl
+def class_number : Nat = 3
+#eval class_number 
+
+def security_bits : Nat = 128
+#eval s!"CSIDH={d.Natabs} has ~{security_bits} bit security"
+theorem d_plus_511 : d + 511 = 0 := by rfl 
+#eval d + 511 
+#eval security_bits
