@@ -1,0 +1,31 @@
+import Mathlib.GroupTheory.GroupAction.Defs
+
+-- Fig 4.3: Group Action Definition
+namespace MyGroupAction
+def intAddAction : MulAction ℤ where
+  smul := HAdd.hAdd
+  one_smul := by intro x; simp
+  mul_smul := by intro m n x; simp [add_assoc]
+end MyGroupAction
+
+-- Theorem 4.1: Commutativity theorem + proof sketch
+theorem smul_comm (m n : ℤ) (x : ℤ) :
+  intAddAction.smul m (intAddAction.smul n x) = intAddAction.smul n (intAddAction.smul m x) := by
+  simp [intAddAction]
+  ring
+
+-- Section 4.4: Protocol
+namespace CSIDHProtocol
+def SecretKey := List ℤ
+def PublicKey := ℤ
+def keyExchange (sk : SecretKey) (pk : PublicKey) : ℤ :=
+  sk.foldl (fun x e => intAddAction.smul e x) pk
+
+theorem shared_secret_eq (sk1 sk2 : SecretKey) (base : ℤ) :
+  keyExchange sk1 (keyExchange sk2 base) = keyExchange sk2 (keyExchange sk1 base) := by
+  induction sk1 with
+  | nil => simp [keyExchange]
+  | cons m ms ih =>
+    simp [keyExchange]
+    rw [smul_comm, ih]
+end CSIDHProtocol
