@@ -1,0 +1,6 @@
+structure CSIDHCurve (p : ℕ) [Fact p.Prime] where
+  A : ZMod p
+  h_nonsingular : A^2 ≠ 4 -- curve singular na ho
+
+def baseCurve (p : ℕ) [Fact p.Prime] : CSIDHCurve p :=
+  ⟨0, by norm_num⟩ -- A=0 wali curve y² = x³ + x
